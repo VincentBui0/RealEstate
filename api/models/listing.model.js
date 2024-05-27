@@ -1,63 +1,67 @@
+// Import the mongoose library to interact with MongoDB
 import mongoose from 'mongoose';
 
+// Define a schema for the listings using mongoose.Schema
 const listingSchema = new mongoose.Schema(
   {
     name: {
-      type: String,
-      required: true,
+      type: String,         // The name of the listing
+      required: true,       // This field is required
     },
     description: {
-      type: String,
-      required: true,
+      type: String,         // A description of the listing
+      required: true,       // This field is required
     },
     address: {
-      type: String,
-      required: true,
+      type: String,         // The address of the listing
+      required: true,       // This field is required
     },
     regularPrice: {
-      type: Number,
-      required: true,
+      type: Number,         // The regular price of the listing
+      required: true,       // This field is required
     },
     discountPrice: {
-      type: Number,
-      required: true,
+      type: Number,         // The discounted price of the listing (if any)
+      required: true,       // This field is required
     },
     bathrooms: {
-      type: Number,
-      required: true,
+      type: Number,         // The number of bathrooms in the listing
+      required: true,       // This field is required
     },
     bedrooms: {
-      type: Number,
-      required: true,
+      type: Number,         // The number of bedrooms in the listing
+      required: true,       // This field is required
     },
     furnished: {
-      type: Boolean,
-      required: true,
+      type: Boolean,        // Indicates if the listing is furnished
+      required: true,       // This field is required
     },
     parking: {
-      type: Boolean,
-      required: true,
+      type: Boolean,        // Indicates if the listing has parking available
+      required: true,       // This field is required
     },
     type: {
-      type: String,
-      required: true,
+      type: String,         // The type of listing (e.g., sale, rent)
+      required: true,       // This field is required
     },
     offer: {
-      type: Boolean,
-      required: true,
+      type: Boolean,        // Indicates if there is an offer on the listing
+      required: true,       // This field is required
     },
     imageUrls: {
-      type: Array,
-      required: true,
+      type: Array,          // An array of image URLs for the listing
+      required: true,       // This field is required
     },
     userRef: {
-      type: String,
-      required: true,
+      type: String,         // Reference to the user who created the listing
+      required: true,       // This field is required
     },
   },
-  { timestamps: true }
+  { timestamps: true }      // Adds createdAt and updatedAt timestamps automatically
 );
 
+// Create a mongoose model for the Listing schema
 const Listing = mongoose.model('Listing', listingSchema);
 
+// Export the Listing model to use it in other parts of the application
 export default Listing;
