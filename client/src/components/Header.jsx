@@ -4,17 +4,24 @@ import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 export default function Header() {
+  // Accessing current user information from Redux store
   const { currentUser } = useSelector((state) => state.user);
+  
+  // State for search term and navigation
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
+  
+  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Constructing search query and navigating to search page
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('searchTerm', searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
 
+  // Effect to populate search term from URL parameters
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
@@ -22,15 +29,19 @@ export default function Header() {
       setSearchTerm(searchTermFromUrl);
     }
   }, [location.search]);
+  
   return (
     <header className='bg-slate-200 shadow-md'>
       <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
+        {/* Logo and home link */}
         <Link to='/'>
           <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-            <span className='text-slate-500'>Bui</span>
+            <span className='text-slate-500'>Sahand</span>
             <span className='text-slate-700'>Estate</span>
           </h1>
         </Link>
+        
+        {/* Search form */}
         <form
           onSubmit={handleSubmit}
           className='bg-slate-100 p-3 rounded-lg flex items-center'
@@ -46,6 +57,8 @@ export default function Header() {
             <FaSearch className='text-slate-600' />
           </button>
         </form>
+        
+        {/* Navigation links */}
         <ul className='flex gap-4'>
           <Link to='/'>
             <li className='hidden sm:inline text-slate-700 hover:underline'>
@@ -57,6 +70,8 @@ export default function Header() {
               About
             </li>
           </Link>
+          
+          {/* Conditional rendering based on user authentication */}
           <Link to='/profile'>
             {currentUser ? (
               <img
